@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     private Toolbar mToolbar;
 
-
+    //private List<String> titles = new ArrayList<>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,11 +55,13 @@ public class MainActivity extends AppCompatActivity {
         mTabLayout = findViewById(R.id.tab_zhihu_main);
         mViewPager = findViewById(R.id.vp_zhihu_main);
 
+
         fragments.add(new DailyFragment());
         fragments.add(new ThemeFragment());
         fragments.add(new SectionFragment());
         fragments.add(new HotFragment());
         zhihuMainAdapter = new ZhihuMainAdapter(getSupportFragmentManager(),fragments);
+
 
         //TabLayout配合ViewPager有时会出现不显示Tab文字的Bug,需要按如下顺序
         for(int i = 0;i<tabTitle.length;i++){
@@ -72,6 +74,24 @@ public class MainActivity extends AppCompatActivity {
         for(int i = 0;i<tabTitle.length;i++){
             mTabLayout.getTabAt(i).setText(tabTitle[i]);
         }
+/*        for(int i=0;i<3;i++){
+            BlankFragment fragment = BlankFragment.newInstance(""+i,"");
+            fragments.add(fragment);
+            titles.add(String.valueOf(i));
+
+
+
+            mTabLayout.addTab(mTabLayout.newTab());
+        }
+        zhihuMainAdapter = new ZhihuMainAdapter(getSupportFragmentManager(),fragments);
+        mViewPager.setAdapter(zhihuMainAdapter);
+        mTabLayout.setupWithViewPager(mViewPager);
+
+        for(int i = 0;i<titles.size();i++){
+            TextView textView = (TextView) LayoutInflater.from(this).inflate(R.layout.custom_tab, null);
+            textView.setText(String.valueOf(i));
+            mTabLayout.getTabAt(i).setCustomView(textView);
+        }*/
     }
 
     @Override

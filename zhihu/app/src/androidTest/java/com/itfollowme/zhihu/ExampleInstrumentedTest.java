@@ -3,11 +3,15 @@ package com.itfollowme.zhihu;
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
+import android.util.Log;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
-import static org.junit.Assert.*;
+import java.io.IOException;
+import java.io.InputStream;
+
+import static org.junit.Assert.assertEquals;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -22,5 +26,21 @@ public class ExampleInstrumentedTest {
         Context appContext = InstrumentationRegistry.getTargetContext();
 
         assertEquals("com.itfollowme.zhihu", appContext.getPackageName());
+    }
+
+    @Test
+    public void testReadJSON(){
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        try {
+            InputStream inputStream = appContext.getAssets().open("news.json");
+            int size = inputStream.available();
+            byte[] buf = new byte[size];
+            inputStream.read(buf);
+            String text = new String(buf,"UTF-8");
+            //            JSON.parseObject(text,);
+            Log.i("text",text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

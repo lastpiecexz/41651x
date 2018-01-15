@@ -23,9 +23,12 @@
             android:id="@+id/tab_zhihu_main"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorPrimary"
-            app:tabIndicatorColor="@color/colorWhite"
-            app:tabTextAppearance=""
+            app:tabTextAppearance="@android:style/TextAppearance.Material.Subhead"
+            app:tabIndicatorColor="@android:color/white"
+            app:tabSelectedTextColor="@android:color/white"
+            app:tabTextColor="@android:color/white"
+            app:tabMode="fixed"
+            app:tabGravity="fill"
             >
 
         </android.support.design.widget.TabLayout>
