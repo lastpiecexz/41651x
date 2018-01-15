@@ -7,6 +7,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.itfollowme.zhihu.R;
+import com.itfollowme.zhihu.ui.model.DailyListBean;
 
 import java.util.List;
 
@@ -16,12 +17,12 @@ import java.util.List;
 
 public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
-    List<String> items;
+    List<DailyListBean.StoryBean> stories;
 
     Context context;
 
-    public DailyAdapter(List<String> items,Context context) {
-        this.items = items;
+    public DailyAdapter(List<DailyListBean.StoryBean> stories,Context context) {
+        this.stories = stories;
         this.context = context;
     }
 
@@ -37,11 +38,12 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
     @Override
     public void onBindViewHolder(RecyclerView.ViewHolder holder, int position) {
         DailyViewHolder dvHolder = (DailyViewHolder)holder;
-        dvHolder.mTvTitle.setText(items.get(position));
+        dvHolder.mTvTitle.setText(stories.get(position).getTitle());
+
     }
 
     @Override
     public int getItemCount() {
-        return items.size();
+        return stories.size();
     }
 }
