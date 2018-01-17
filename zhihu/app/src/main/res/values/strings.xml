@@ -47,5 +47,10 @@
     <string name="setting_feedback">意见反馈</string>
     <string name="setting_update">检查更新</string>
     <string name="setting_clear">清除缓存</string>
+    <string name="title_activity_detail">DetailActivity</string>
+    <string name="menu_share">分享</string>
+    <string name="menu_review">评论</string>
+    <string name="menu_favorite">收藏</string>
+    <string name="menu_support">点赞</string>
 
 </resources>

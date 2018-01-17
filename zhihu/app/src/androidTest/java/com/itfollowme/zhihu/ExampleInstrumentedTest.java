@@ -5,6 +5,9 @@ import android.support.test.InstrumentationRegistry;
 import android.support.test.runner.AndroidJUnit4;
 import android.util.Log;
 
+import com.alibaba.fastjson.JSON;
+import com.itfollowme.zhihu.ui.model.DetailBean;
+
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
@@ -39,6 +42,28 @@ public class ExampleInstrumentedTest {
             String text = new String(buf,"UTF-8");
             //            JSON.parseObject(text,);
             Log.i("text",text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testReadJSON2(){
+        Context appContext = InstrumentationRegistry.getTargetContext();
+        try {
+            InputStream inputStream = appContext.getAssets().open("9666020.json");
+            int size = inputStream.available();
+            byte[] buf = new byte[size];
+            inputStream.read(buf);
+            String text = new String(buf,"UTF-8");
+            //            JSON.parseObject(text,);
+            Log.i("text",text);
+
+            DetailBean detailBean = JSON.parseObject(text, DetailBean.class);
+            Log.i("zhihu",detailBean.getShareUrl());
+            Log.i("zhihu","title"+detailBean.getTitle() +"\timageSource:" +detailBean.getImageSource());
+            Log.i("zhihu",detailBean.getImage());
+            Log.i("zhihu",""+detailBean.getImages());
         } catch (IOException e) {
             e.printStackTrace();
         }

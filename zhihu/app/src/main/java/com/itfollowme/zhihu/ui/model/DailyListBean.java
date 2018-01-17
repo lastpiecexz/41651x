@@ -47,7 +47,7 @@ public class DailyListBean implements Serializable{
       "id": 9666020,
       "ga_prefix": "011515",
       "title": "王思聪现实中是一个什么样的人？"*/
-    public static class StoryBean{
+    public static class StoryBean implements Serializable{
         private List<String> images;
         private int type;
         private int id;
@@ -100,7 +100,7 @@ public class DailyListBean implements Serializable{
       "id": 9666000,
       "ga_prefix": "011514",
       "title": "为什么请来了 Jessie J，《歌手》总导演洪涛还是哭红了眼？"*/
-    public static class TopStoryBean{
+    public static class TopStoryBean implements Serializable{
         private String image;
         private int type;
         private int id;

@@ -6,7 +6,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-        <item name="colorControlNormal">@color/colorWhite</item>
+        <!--<item name="colorControlNormal">@color/colorWhite</item>-->
         <item name="android:textColorPrimary">@color/colorWhite</item>
     </style>
 
@@ -16,6 +16,7 @@
         <item name="windowActionBar">false</item>
     </style>
 
+
     <style name="BaseAppTheme.NoActionBar2" parent="BaseAppTheme">
         <item name="windowNoTitle">true</item>
         <item name="windowActionBar">false</item>
@@ -23,6 +24,14 @@
         <item name="android:windowTranslucentStatus">true</item>
     </style>
 
+    <style name="BaseAppTheme.NoActionBar3" parent="BaseAppTheme">
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+    </style>
+    <style name="TextAppearance.ExpandedTitle"
+           parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <item name="android:textSize">26sp</item>
+    </style>
     <style name="BaseAppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar"/>
 
     <style name="BaseAppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light"/>
