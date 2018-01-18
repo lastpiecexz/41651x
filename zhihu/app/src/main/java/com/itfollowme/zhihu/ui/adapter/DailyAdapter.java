@@ -87,6 +87,8 @@ public class DailyAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> 
         return dailyListBean.getStories().size();
     }
 
+
+
     public void onClick(View v) {
         if (mItemClickListener!=null){
             mItemClickListener.onItemClick((Integer) v.getTag());

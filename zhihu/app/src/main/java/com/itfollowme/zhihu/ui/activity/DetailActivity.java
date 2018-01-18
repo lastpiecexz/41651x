@@ -36,9 +36,9 @@ public class DetailActivity extends AppCompatActivity {
         mTvDetailBarCopyright = findViewById(R.id.tv_detail_bar_copyright);
         mWvBody = findViewById(R.id.wv_body);
 
-       // int id = getIntent().getIntExtra("id",9666020);
+        int id = getIntent().getIntExtra("id",9666020);
+        detailBean = parseJSON(id);
 
-        detailBean = parseJSON(9666020);
         String htmlData = HtmlUtil.createHtmlData(detailBean.getBody(),detailBean.getCss(),detailBean.getJs());
         mTvDetailBarCopyright.setText(detailBean.getImageSource());
         Glide.with(this).load(detailBean.getImage()).into(mIvDetailBarImage);
@@ -60,7 +60,7 @@ public class DetailActivity extends AppCompatActivity {
     public DetailBean parseJSON(int id){
         DetailBean detailBean = null;
         try {
-            InputStream inputStream = getAssets().open(9666020+".json");
+            InputStream inputStream = getAssets().open(id+".json");
             int size = inputStream.available();
             byte[] buf = new byte[size];
             inputStream.read(buf);

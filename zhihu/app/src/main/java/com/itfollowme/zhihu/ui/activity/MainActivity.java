@@ -130,10 +130,5 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-/*    public void showDetail(View view) {
-        Log.i("zhihu",""+view.getClass()+" "+view);
 
-        Intent intent = new Intent(this,DetailActivity.class);
-        startActivity(intent);
-    }*/
 }
