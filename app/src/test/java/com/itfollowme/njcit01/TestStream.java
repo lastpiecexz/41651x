@@ -4,14 +4,17 @@ import org.junit.Test;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 
 /**
  * Created by notre on 2018/3/6.
@@ -116,15 +119,84 @@ public class TestStream {
             bis.close();*/
             //InputStream Reader
             //OutputStream Writer
-            FileReader fileReader = new FileReader("g:\\1.txt");
+            //按照系统的默认编码直接读出来
+//            FileReader fileReader = new FileReader("g:\\students\\41651x\\3.txt");
+
+            FileInputStream fis = new FileInputStream("g:\\students\\41651x\\1.txt");
+            InputStreamReader isr = new InputStreamReader(fis,"GBK");
             char[] buf = new char[1];
-            while (fileReader.read(buf) != -1) {
+            while (isr.read(buf) != -1) {
                 System.out.println(new String(buf));
             }
+
+            isr.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testReadFile3() {
+        try {
+            BufferedInputStream bis = new BufferedInputStream(new FileInputStream(new File("g:\\students\\41651x\\1.txt")));
+            //在内存中创建一个虚拟文件，是由字节数组组成
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+
+            byte[] buf = new byte[1];
+            while (bis.read(buf) != -1) {
+                baos.write(buf);
+            }
+
+            bis.close();
+
+            //将虚拟文件内容取出来
+            byte[] bb = baos.toByteArray();
+            //将字节在组成字符串的时候指定编码
+            String str = new String(bb,"GBK");
+            System.out.println(str);
 
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    @Test
+    public void testSerializable(){
+        Student s1 = new Student();
+        s1.age=18;
+        s1.name = "聚财";
+        s1.gender = 'F';
+
+        try {
+            FileOutputStream fos = new FileOutputStream("g:\\students\\s.dat");
+            ObjectOutputStream oos = new ObjectOutputStream(fos);
+            oos.writeObject(s1);
+            oos.flush();
+            oos.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    @Test
+    public void testSerializable2(){
+
+        try {
+            ObjectInputStream ois  = new ObjectInputStream(new FileInputStream(
+                    "g:\\students\\s.dat"));
+            Student s2 = (Student) ois.readObject();
+            System.out.println(s2.gender+s2.name+s2.age);
+            ois.close();
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (ClassNotFoundException e) {
             e.printStackTrace();
         }
     }
