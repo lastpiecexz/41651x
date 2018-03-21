@@ -25,12 +25,12 @@ public class TestSocket {
 
     @Test
     public void testSocketServer(){
-        //所有的电脑都有端口
-        //创建一个总机 总机的号码就是你的当前ip地址 Socket == 电话
+        //�?有的电脑都有端口
+        //创建�?个�?�机 总机的号码就是你的当前ip地址 Socket == 电话
         try {
             ServerSocket serverSocket = new ServerSocket(8888);
-            Socket socket = serverSocket.accept(); //安排一个电话机接听电话
-            //电话有 听筒和话筒
+            Socket socket = serverSocket.accept(); //安排�?个电话机接听电话
+            //电话�? 听筒和话�?
             //InputStream 听筒  OutputStream 话筒
             InputStream in = socket.getInputStream();
             InputStreamReader isr = new InputStreamReader(in);
@@ -55,10 +55,10 @@ public class TestSocket {
 
     @Test
     public void testSocketClient(){
-        //打电话
+        //打电�?
         try {
             Socket socket = new Socket("127.0.0.1",8888);
-            //拿起话筒说句话
+            //拿起话筒说句�?
             OutputStream os = socket.getOutputStream();
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(os));
             br.write("热烈庆祝十九大胜利闭幕！");
@@ -75,16 +75,16 @@ public class TestSocket {
 
     @Test
     public void testSocketServer2(){
-        //所有的电脑都有端口
-        //创建一个总机 总机的号码就是你的当前ip地址 Socket == 电话
+        //�?有的电脑都有端口
+        //创建�?个�?�机 总机的号码就是你的当前ip地址 Socket == 电话
         try {
             ServerSocket serverSocket = new ServerSocket(8888);
-            final Socket socket = serverSocket.accept(); //安排一个电话机接听电话
+            final Socket socket = serverSocket.accept(); //安排�?个电话机接听电话
 
             Thread thread = new Thread(){
                 @Override
                 public void run() {
-                    //电话有 听筒和话筒
+                    //电话�? 听筒和话�?
                     //InputStream 听筒  OutputStream 话筒
                     BufferedReader br = null;
                     try {
@@ -113,7 +113,7 @@ public class TestSocket {
             //挂机
 //           socket.close();
 //           serverSocket.close();
-            //从键盘拿取一个输入
+            //从键盘拿取一个输�?
             Scanner scanner = new Scanner(System.in);
             OutputStream os = socket.getOutputStream();
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(os));
@@ -135,12 +135,12 @@ public class TestSocket {
     @Test
     public void testSocketClient2(){
         try {
-            final Socket socket = new Socket("127.0.0.1",8888); //安排一个电话机接听电话
+            final Socket socket = new Socket("127.0.0.1",8888); //安排�?个电话机接听电话
 
             Thread thread = new Thread(){
                 @Override
                 public void run() {
-                    //电话有 听筒和话筒
+                    //电话�? 听筒和话�?
                     //InputStream 听筒  OutputStream 话筒
                     BufferedReader br = null;
                     try {
@@ -169,7 +169,7 @@ public class TestSocket {
             //挂机
             //           socket.close();
             //           serverSocket.close();
-            //从键盘拿取一个输入
+            //从键盘拿取一个输�?
             Scanner scanner = new Scanner(System.in);
             OutputStream os = socket.getOutputStream();
             BufferedWriter br = new BufferedWriter(new OutputStreamWriter(os));
