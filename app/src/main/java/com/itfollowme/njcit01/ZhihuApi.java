@@ -14,7 +14,7 @@ import retrofit2.http.Path;
 public interface ZhihuApi {
 
 //    String URL = "https://news-at.zhihu.com/
-    String URL = "http://172.18.36.68/";
+    String URL = "http://172.18.26.56/";
 
     @GET("/api/4/news/{id}")
     Call<DetailBean> getZhihuDetail(@Path("id") Integer id);
