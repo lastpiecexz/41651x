@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
 
     weatherPresenter = new WeatherPresenterImpl(weatherFragment);
     weatherFragment.setPresenter(weatherPresenter);
-
   }
 
   public void search(View view) {
