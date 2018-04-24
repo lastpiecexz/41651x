@@ -2,58 +2,49 @@ package com.itfollowme.rxjavademo;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.view.View;
+import android.widget.EditText;
+import android.widget.TextView;
+import com.itfollowme.rxjavademo.api.WeatherApi;
+import com.itfollowme.rxjavademo.model.Weather;
 import io.reactivex.Observable;
-import io.reactivex.ObservableEmitter;
-import io.reactivex.ObservableOnSubscribe;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
-import io.reactivex.disposables.Disposable;
 import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
+import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
+import retrofit2.converter.fastjson.FastJsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
+
+  private EditText mEtCityId;
+  private TextView mTvResult;
 
   @Override
   protected void onCreate(Bundle savedInstanceState) {
     super.onCreate(savedInstanceState);
-
     setContentView(R.layout.activity_main);
-    //创建一个上游 Observable：
-    Observable.create(new ObservableOnSubscribe<Integer>() {
-      @Override
-      public void subscribe(ObservableEmitter<Integer> emitter) throws Exception {
+    mEtCityId = findViewById(R.id.et_cityId);
+    mTvResult = findViewById(R.id.tv_result);
+  }
 
-        Log.i("RxJavaDemo1",Thread.currentThread().getName());
-
-        emitter.onNext(1);
-
-        emitter.onComplete();
-      }
-    }).subscribeOn(Schedulers.newThread())
+  public void search(View view) {
+    Retrofit retrofit = new Retrofit.Builder().
+        baseUrl(WeatherApi.WEATHER_URL).
+        addCallAdapterFactory(RxJava2CallAdapterFactory.create()).
+        addConverterFactory(FastJsonConverterFactory.create()).
+        build();
+    WeatherApi weatherApi = retrofit.create(WeatherApi.class);
+    String cityId = mEtCityId.getText().toString();
+    Observable<Weather> observable = weatherApi.getWeather(cityId);
+    observable
+        .map(weather-> {
+            return weather.getWeatherInfo().toString();
+          }
+        )
+        .subscribeOn(Schedulers.io())
         .observeOn(AndroidSchedulers.mainThread())
-        .subscribe(new Observer<Integer>() {
-      @Override
-      public void onSubscribe(Disposable d) {
-        Log.i("RxJavaDemo1", "OnSubscribe");
-      }
-
-      @Override
-      public void onNext(Integer value) {
-        Log.i("RxJavaDemo1", Thread.currentThread().getName()+": " + value);
-      }
-
-      @Override
-      public void onError(Throwable e) {
-        Log.i("RxJavaDemo1", "error");
-      }
-
-      @Override
-      public void onComplete() {
-        Log.i("RxJavaDemo1", "complete");
-      }
-    });
-
-
-
+        .subscribe(s -> {
+            mTvResult.setText(s);
+        });
   }
 }
