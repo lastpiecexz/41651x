@@ -3,7 +3,6 @@ package com.itfollowme.meizi;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.RecyclerView.LayoutManager;
 import android.support.v7.widget.StaggeredGridLayoutManager;
 import com.itfollowme.meizi.adapter.MeiziAdapter;
 import com.itfollowme.meizi.api.MeiziApis;
@@ -23,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
   private RecyclerView recyclerView;
   private MeiziAdapter meiziAdapter;
-  private LayoutManager mLayoutManager;
+  private StaggeredGridLayoutManager mLayoutManager;
   private List<MeiziPhoto> list;
   @Override
   protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +35,7 @@ public class MainActivity extends AppCompatActivity {
     mLayoutManager = new StaggeredGridLayoutManager(
         spanCount,
         StaggeredGridLayoutManager.VERTICAL);
+//    mLayoutManager.setGapStrategy(StaggeredGridLayoutManager.GAP_HANDLING_NONE);
     meiziAdapter = new MeiziAdapter(MainActivity.this, list);
     mLayoutManager.setItemPrefetchEnabled(false);
     recyclerView.setLayoutManager(mLayoutManager);

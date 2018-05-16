@@ -1,13 +1,18 @@
 package com.itfollowme.meizi.adapter;
 
 import android.content.Context;
+import android.graphics.drawable.Drawable;
 import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
-import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
+import com.bumptech.glide.request.target.SimpleTarget;
+import com.bumptech.glide.request.transition.Transition;
+import com.itfollowme.meizi.App;
+import com.itfollowme.meizi.GlideApp;
 import com.itfollowme.meizi.R;
 import com.itfollowme.meizi.model.MeiziResult.MeiziPhoto;
 import java.util.List;
@@ -36,12 +41,29 @@ public class MeiziAdapter extends RecyclerView.Adapter<MeiziViewHolder> {
   @Override
   public void onBindViewHolder(@NonNull MeiziViewHolder holder, int position) {
     String url = photos.get(position).getUrl();
-    View view = holder.itemView;
-    ImageView imageView = (ImageView) view.findViewById(R.id.iv_photo);
 
-    //手动更改高度，不同位置的高度有所不同
-    //imageView.setMaxHeight(100 + (position % 3) * 30);
-    Glide.with(context).load(url).into(imageView);
+
+    GlideApp.with(context).load(url).diskCacheStrategy(
+        DiskCacheStrategy.ALL)
+        .into(new SimpleTarget<Drawable>() {
+          @Override
+          public void onResourceReady(@NonNull Drawable resource,
+              @Nullable Transition<? super Drawable> transition) {
+
+            if(holder.getAdapterPosition() != RecyclerView.NO_POSITION) {
+
+                int width = resource.getIntrinsicWidth();
+                int height = resource.getIntrinsicHeight();
+                int realHeight = (App.SCREEN_WIDTH / 2) * height / width;
+                ViewGroup.LayoutParams lp = holder.ivGirl.getLayoutParams();
+                lp.height = realHeight;
+              }
+              holder.ivGirl.setImageDrawable(resource);
+
+          }
+        });
+
+
   }
 
   @Override
